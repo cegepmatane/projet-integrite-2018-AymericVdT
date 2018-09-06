@@ -3,8 +3,8 @@ package modele;
 public class Arme {
 
 	protected String nom;
-	protected String type;
 	protected String famille;
+	protected String type;
 	protected String origine;
 	protected String epoque;
 	
