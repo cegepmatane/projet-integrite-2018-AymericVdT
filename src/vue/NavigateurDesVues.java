@@ -38,7 +38,6 @@ public class NavigateurDesVues {
 		return vueArme;
 	}
 
-	@Override
 	public void start(Stage stade) throws Exception {
 		stade.setScene(this.vueAjouterArme);
 		stade.setScene(this.vueListeArme);
