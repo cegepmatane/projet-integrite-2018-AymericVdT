@@ -42,5 +42,45 @@ public class Arme {
 		this.origine = origine;
 		this.epoque = epoque;
 	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getFamille() {
+		return famille;
+	}
+
+	public void setFamille(String famille) {
+		this.famille = famille;
+	}
+
+	public String getOrigine() {
+		return origine;
+	}
+
+	public void setOrigine(String origine) {
+		this.origine = origine;
+	}
+
+	public String getEpoque() {
+		return epoque;
+	}
+
+	public void setEpoque(String epoque) {
+		this.epoque = epoque;
+	}
 	
 }
