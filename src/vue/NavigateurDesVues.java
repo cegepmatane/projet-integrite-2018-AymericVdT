@@ -3,10 +3,11 @@ package vue;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Arme;
 
-public class NavigateurDesVues {
+public class NavigateurDesVues extends Application{
 	private VueAjouterArme vueAjouterArme;
 	private VueListeArme vueListeArme;
 	private VueArme vueArme;

@@ -23,10 +23,11 @@ public class VueListeArme extends Scene{
 	public void afficherListeArme(List<Arme> listeArme) {
 		grilleArme.getChildren().clear();
 		
-		grilleArme.add(new Label("Nom de famille : "), 0, 0);
-		grilleArme.add(new Label("Nationnalite : "), 1, 0);
-		grilleArme.add(new Label("Adresse : "), 2, 0);
-		grilleArme.add(new Label("Classe Sociale : "), 3, 0);
+		grilleArme.add(new Label("Nom de l'arme: "), 0, 0);
+		grilleArme.add(new Label("Famille: "), 1, 0);
+		grilleArme.add(new Label("Type: "), 2, 0);
+		grilleArme.add(new Label("Origine: "), 3, 0);
+		grilleArme.add(new Label("Epoque: "), 4, 0);
 		int position = 1 ;
 		for(Arme arme : listeArme) 
 		{
