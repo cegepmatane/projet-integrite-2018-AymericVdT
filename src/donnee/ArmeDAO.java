@@ -21,7 +21,7 @@ public class ArmeDAO {
 	private static String BASEDEDONNEES_MOTDEPASSE = "root";
 	private Connection connection = null;
 
-	public List<Arme> listerMoutons()
+	public List<Arme> listerArmes()
 	{
 		
 		
