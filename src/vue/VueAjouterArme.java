@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import modele.Arme;
 
 public class VueAjouterArme extends Scene{
 	
@@ -59,4 +60,14 @@ public class VueAjouterArme extends Scene{
 		panneau.getChildren().add(grilleArme);
 		panneau.getChildren().add(new Button("Enregistrer"));		
 	}
+	
+	public Arme demanderArme() {
+		Arme arme = new Arme(this.valeurNom.getText(),
+				this.valeurType.getText(),
+				this.valeurFamille.getText(),
+				this.valeurOrigine.getText(),
+				this.valeurEpoque.getText());
+		return arme;
+	}
+	
 }
