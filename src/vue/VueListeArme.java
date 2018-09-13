@@ -43,4 +43,8 @@ public class VueListeArme extends Scene{
 		
 		this.grilleArme.add(this.actionNaviguerAjouterArme, 1, ++numero);
 	}
+	
+	public void setControleur(ControleurArme controleur) {
+		this.controleur = controleur;
+	}
 }
