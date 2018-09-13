@@ -70,4 +70,7 @@ public class VueAjouterArme extends Scene{
 		return arme;
 	}
 	
+	public void setControleur(ControleurArme controleur) {
+		this.controleur = controleur;
+	}
 }
