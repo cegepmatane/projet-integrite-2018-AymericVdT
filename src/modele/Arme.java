@@ -1,7 +1,7 @@
 package modele;
 
 public class Arme {
-
+	
 	protected String nom;
 	protected String famille;
 	protected String type;
