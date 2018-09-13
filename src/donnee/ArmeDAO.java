@@ -58,4 +58,14 @@ public class ArmeDAO {
 		return listeArmes;
 	}
 	
+	public void ajouterArme(Arme arme){
+		try {
+			Statement requeteAjouterArme = connection.createStatement();
+			requeteAjouterArme.execute("INSERT into Arme(nom,famille,type,origine,epoque) VALUES('"+arme.getNom()+"','"+arme.getType()+"','"+arme.getFamille()+"','"+arme.getOrigine()+"','"+arme.getEpoque());
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 }
