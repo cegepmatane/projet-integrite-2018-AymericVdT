@@ -1,5 +1,8 @@
 package vue;
 
+import action.ControleurArme;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,11 +18,22 @@ public class VueAjouterArme extends Scene{
 	protected TextField valeurOrigine;
 	protected TextField valeurEpoque;
 	
+	private ControleurArme controleur = null;
+	protected Button actionEnregistrerArme = null;
+	
 	public VueAjouterArme() {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
-		
 		GridPane grilleArme = new GridPane();
+		this.actionEnregistrerArme = new Button("Enregistrer");
+		
+		this.actionEnregistrerArme.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				controleur.notifierEnregistrerNouvelleArme();
+				
+			}});
 		
 		valeurNom = new TextField();
 		grilleArme.add(new Label("Nom de l'arme : "), 0, 0);
