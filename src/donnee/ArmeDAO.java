@@ -1,6 +1,14 @@
 package donnee;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import modele.Arme;
 
 public class ArmeDAO {
 
@@ -13,4 +21,41 @@ public class ArmeDAO {
 	private static String BASEDEDONNEES_MOTDEPASSE = "root";
 	private Connection connection = null;
 
+	public List<Arme> listerMoutons()
+	{
+		
+		
+		
+		try {
+			Class.forName(BASEDEDONNEES_DRIVER);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		List<Arme> listeArmes =  new ArrayList<Arme>();
+		try {
+			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+			
+			Statement requeteListeArmes = connection.createStatement();
+			ResultSet curseurListeArmes = requeteListeArmes.executeQuery("SELECT * FROM Armes");
+			while(curseurListeArmes.next())
+			{
+				String nom = curseurListeArmes.getString("nom");
+				String famille = curseurListeArmes.getString("famille");
+				String type = curseurListeArmes.getString("type");
+				String origine = curseurListeArmes.getString("origine");
+				String epoque = curseurListeArmes.getString("epoque");
+				System.out.println("" + nom + ", famille:" + famille + " un type de " + type + " creee en " + origine + " au " + epoque + "eme siecle");
+				Arme arme = new Arme(nom,famille, type, origine, epoque);
+				listeArmes.add(arme);
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//return this.simulerListerMoutons();
+		return listeArmes;
+	}
+	
 }
