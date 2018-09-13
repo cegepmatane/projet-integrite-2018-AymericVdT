@@ -1,5 +1,6 @@
 package vue;
 
+import action.ControleurArme;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -14,8 +15,10 @@ public class VueArme extends Scene{
 	protected Label valeurOrigine = null;
 	protected Label valeurEpoque = null;
 	
+	private ControleurArme controleur = null;
+	
 	public VueArme() {
-		super(new Pane(), 400,400);
+		super(new GridPane(), 400,400);
 		Pane panneau = (Pane) this.getRoot();
 		
 		
@@ -44,9 +47,6 @@ public class VueArme extends Scene{
 		
 		panneau.getChildren().add(grilleArme);
 		
-		
-		
-		
 	}
 	public void afficherArme(Arme arme)
 	{
@@ -55,5 +55,9 @@ public class VueArme extends Scene{
 		this.valeurType.setText(arme.getType());
 		this.valeurOrigine.setText(arme.getOrigine());
 		this.valeurEpoque.setText(arme.getEpoque());
+	}
+	
+	public void setControleur(ControleurArme controleur) {
+		this.controleur = controleur;
 	}
 }
