@@ -2,7 +2,11 @@ package vue;
 
 import java.util.List;
 
+import action.ControleurArme;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -13,30 +17,30 @@ public class VueListeArme extends Scene{
 	
 	private GridPane grilleArme = new GridPane();
 	
+	private ControleurArme controleur = null;
+	
+	private Button actionNaviguerAjouterArme;
 	public VueListeArme() {
-		super(new Pane(), 800,400);
+		super(new GridPane(), 800,400);
 		Pane panneau = (Pane) this.getRoot();
-		grilleArme = new GridPane();
-		panneau.getChildren().add(grilleArme);
+		grilleArme = (GridPane) this.getRoot();
+		this.actionNaviguerAjouterArme = new Button("Ajouter une arme");
 		}
 
-	public void afficherListeArme(List<Arme> listeArme) {
-		grilleArme.getChildren().clear();
+	public void afficherListeArme(List<Arme> listeArmes) {
+		this.grilleArme.getChildren().clear();
 		
-		grilleArme.add(new Label("Nom de l'arme: "), 0, 0);
-		grilleArme.add(new Label("Famille: "), 1, 0);
-		grilleArme.add(new Label("Type: "), 2, 0);
-		grilleArme.add(new Label("Origine: "), 3, 0);
-		grilleArme.add(new Label("Epoque: "), 4, 0);
-		int position = 1 ;
-		for(Arme arme : listeArme) 
+		int numero = 0;
+		this.grilleArme.add(new Label("Nom"), 0, numero);
+		this.grilleArme.add(new Label("Type"), 1, numero);			
+		this.actionNaviguerAjouterArme.setOnAction(new EventHandler<ActionEvent>() 
 		{
-		grilleArme.add(new Label(arme.getNom()), 0, position);
-		grilleArme.add(new Label(arme.getType()), 1, position);
-		grilleArme.add(new Label(arme.getFamille()), 2, position);
-		grilleArme.add(new Label(arme.getOrigine()), 3, position);
-		grilleArme.add(new Label(arme.getEpoque()), 4, position);
-		position++;
-		}
+			@Override
+			public void handle(ActionEvent arg0) {
+				controleur.notifierNaviguerAjouterArme();
+			}	
+		});
+		
+		this.grilleArme.add(this.actionNaviguerAjouterArme, 1, ++numero);
 	}
 }
