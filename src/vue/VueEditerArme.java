@@ -74,4 +74,19 @@ public class VueEditerArme extends Scene{
 		this.valeurOrigine.setText(arme.getOrigine());
 		this.valeurEpoque.setText(""+arme.getEpoque());
 	}
+	
+	public Arme demanderArme()
+	{
+		Arme arme = new Arme(this.valeurNom.getText(), 
+								this.valeurType.getText(), 
+								this.valeurFamille.getText(), 
+								this.valeurOrigine.getText(),
+								Integer.parseInt(this.valeurEpoque.getText()));
+		arme.setId(idArme);
+		return arme;
+	}
+	
+	public void setControleur(ControleurArme controleur) {
+		this.controleur = controleur;
+	}
 }
