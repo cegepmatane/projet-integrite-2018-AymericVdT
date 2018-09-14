@@ -2,11 +2,12 @@ package modele;
 
 public class Arme {
 	
+	protected int id;
 	protected String nom;
 	protected String famille;
 	protected String type;
 	protected String origine;
-	protected String epoque;
+	protected int epoque;
 	
 	public Arme(String nom) {
 		super();
@@ -34,7 +35,7 @@ public class Arme {
 		this.origine = origine;
 	}
 
-	public Arme(String nom, String type, String famille, String origine, String epoque) {
+	public Arme(String nom, String type, String famille, String origine, int epoque) {
 		super();
 		this.nom = nom;
 		this.type = type;
@@ -43,6 +44,15 @@ public class Arme {
 		this.epoque = epoque;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 	public String getNom() {
 		return nom;
 	}
@@ -75,11 +85,11 @@ public class Arme {
 		this.origine = origine;
 	}
 
-	public String getEpoque() {
+	public int getEpoque() {
 		return epoque;
 	}
 
-	public void setEpoque(String epoque) {
+	public void setEpoque(int epoque) {
 		this.epoque = epoque;
 	}
 	
