@@ -20,6 +20,8 @@ public class VueEditerArme extends Scene{
 	
 	private ControleurArme controleur = null;
 	protected Button actionEnregistrerArme = null;
+	protected GridPane grilleListeExemplaires = new GridPane();
+	protected Button actionAjouterExemplaire = null;
 	
 	private int idArme = 0;
 	
@@ -27,6 +29,14 @@ public class VueEditerArme extends Scene{
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleArme = new GridPane();
+		
+		this.actionAjouterExemplaire = new Button("Ajouter un exemplaire");
+		
+		this.actionAjouterExemplaire.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+			}
+		});
 		
 		this.actionEnregistrerArme = new Button("Enregistrer");
 		
@@ -39,7 +49,6 @@ public class VueEditerArme extends Scene{
 				
 			}});
 		
-		// https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/GridPane.html
 		valeurNom = new TextField();
 		grilleArme.add(new Label("Nom : "), 0, 0);
 		grilleArme.add(valeurNom, 1, 0);
@@ -63,9 +72,11 @@ public class VueEditerArme extends Scene{
 		panneau.getChildren().add(new Label("Editer une Arme"));
 		panneau.getChildren().add(grilleArme);
 		panneau.getChildren().add(this.actionEnregistrerArme);
+		panneau.getChildren().add(grilleListeExemplaires);
+		panneau.getChildren().add(this.actionAjouterExemplaire);
 	}
 	
-	public void afficherMouton(Arme arme)
+	public void afficherArme(Arme arme)
 	{
 		this.idArme = arme.getId();
 		this.valeurNom.setText(arme.getNom());
