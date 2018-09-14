@@ -54,7 +54,7 @@ public class VueArme extends Scene{
 		this.valeurFamille.setText(arme.getFamille());
 		this.valeurType.setText(arme.getType());
 		this.valeurOrigine.setText(arme.getOrigine());
-		this.valeurEpoque.setText(arme.getEpoque());
+		this.valeurEpoque.setText(""+arme.getEpoque());
 	}
 	
 	public void setControleur(ControleurArme controleur) {

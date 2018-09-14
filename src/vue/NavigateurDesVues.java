@@ -12,9 +12,10 @@ public class NavigateurDesVues extends Application{
 
 	private Stage stade;
 	
-	private VueAjouterArme vueAjouterArme;
-	private VueListeArme vueListeArme;
-	private VueArme vueArme;
+	private VueAjouterArme vueAjouterArme = null;
+	private VueEditerArme vueEditerArme = null;
+	private VueListeArme vueListeArme = null;
+	private VueArme vueArme = null;
 	
 	private ControleurArme controleur = null;
 	
@@ -22,7 +23,7 @@ public class NavigateurDesVues extends Application{
 		this.vueAjouterArme = new VueAjouterArme();
 		this.vueListeArme = new VueListeArme();
 		this.vueArme = new VueArme();
-				
+		this.vueEditerArme = new VueEditerArme();
 	}
 	
 	@Override
@@ -37,12 +38,17 @@ public class NavigateurDesVues extends Application{
 		this.vueListeArme.setControleur(controleur);
 		this.vueArme.setControleur(controleur);
 		this.vueAjouterArme.setControleur(controleur);
+		this.vueEditerArme.setControleur(controleur);
 	}	
 	
 	public VueAjouterArme getVueAjouterArme() {
 		return vueAjouterArme;
 	}
 
+	public VueEditerArme getVueEditerArme() {
+		return vueEditerArme;
+	}
+	
 	public VueListeArme getVueListeArme() {
 		return vueListeArme;
 	}
@@ -61,6 +67,13 @@ public class NavigateurDesVues extends Application{
 		stade.setScene(this.vueListeArme);
 		stade.show();		
 	}
+	
+	public void naviguerVersVueEditerArme()
+	{
+		stade.setScene(this.vueEditerArme);
+		stade.show();				
+	}
+
 	
 	public void naviguerVersVueAjouterArme()
 	{

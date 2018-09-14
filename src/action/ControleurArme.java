@@ -7,6 +7,7 @@ import modele.Arme;
 import vue.NavigateurDesVues;
 import vue.VueAjouterArme;
 import vue.VueArme;
+import vue.VueEditerArme;
 import vue.VueListeArme;
 
 public class ControleurArme {
@@ -14,6 +15,7 @@ public class ControleurArme {
 	private VueListeArme vueListeArme = null;
 	private VueArme vueArme = null;
 	private VueAjouterArme vueAjouterArme = null;
+	private VueEditerArme vueEditerArme = null;
 	ArmeDAO armeDAO = null;
 	
 	private ControleurArme()
@@ -43,14 +45,30 @@ public class ControleurArme {
 		System.out.println("ControleurArme.notifierEnregistrerNouvelleArme()");
 		Arme arme = this.navigateur.getVueAjouterArme().demanderArme();
 		this.armeDAO.ajouterArme(arme);
-		this.vueListeArme.afficherListeArme(this.armeDAO.listerArmes()); // TODO optimiser
+		this.vueListeArme.afficherListeArme(this.armeDAO.listerArmes());
 		this.navigateur.naviguerVersVueListeArme();
 	}
-		
+	
+	public void notifierEnregistrerArme()
+	{
+		System.out.println("ControleurArme.notifierEnregistrerArme()");
+		Arme arme = this.navigateur.getVueEditerArme().demanderArme();
+		this.armeDAO.modifierArme(arme);
+		this.vueListeArme.afficherListeArme(this.armeDAO.listerArmes());
+		this.navigateur.naviguerVersVueListeArme();		
+	}
+	
 	public void notifierNaviguerAjouterArme()
 	{
 		System.out.println("ControleurMouton.notifierNaviguerAjouterMouton()");
 		this.navigateur.naviguerVersVueAjouterArme();
 	}
 	
+	public void notifierNaviguerEditerArme(int idArme)
+	{
+		System.out.println("ControleurArme.notifierEditerArme("+idArme+")");
+		this.vueEditerArme.afficherMouton(this.armeDAO.rapporterArme(idArme));
+		this.navigateur.naviguerVersVueEditerArme();
+		
+	}
 }

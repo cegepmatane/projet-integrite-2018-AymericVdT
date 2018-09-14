@@ -66,7 +66,7 @@ public class VueAjouterArme extends Scene{
 				this.valeurType.getText(),
 				this.valeurFamille.getText(),
 				this.valeurOrigine.getText(),
-				this.valeurEpoque.getText());
+				Integer.parseInt(this.valeurEpoque.getText()));
 		return arme;
 	}
 	
