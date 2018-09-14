@@ -13,27 +13,18 @@ import modele.Arme;
 
 public class ArmeDAO {
 
-	//Commande pour creer la bd
-	//pg_dump --username=postgres --inserts -C  CollectionArmes > C:/Users/1801031/Desktop/collectionArmes.sql
-
-	private static String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-	private static String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/CollectionArmes";
-	private static String BASEDEDONNEES_USAGER = "postgres";
-	private static String BASEDEDONNEES_MOTDEPASSE = "root";
 	private Connection connection = null;
+	
+	public ArmeDAO()
+	{
+		this.connection = BaseDeDonnees.getInstance().getConnection();
+	}
 
 	public List<Arme> listerArmes()
 	{
-		try {
-			Class.forName(BASEDEDONNEES_DRIVER);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 		
 		List<Arme> listeArmes =  new ArrayList<Arme>();
-		try {
-			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
-			
+		try {			
 			Statement requeteListeArmes = connection.createStatement();
 			ResultSet curseurListeArmes = requeteListeArmes.executeQuery("SELECT * FROM Armes");
 			while(curseurListeArmes.next())
@@ -52,7 +43,6 @@ public class ArmeDAO {
 			e.printStackTrace();
 		}
 		
-		//return this.simulerListerMoutons();
 		return listeArmes;
 	}
 	

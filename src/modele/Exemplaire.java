@@ -8,6 +8,12 @@ public class Exemplaire {
 	protected String classification;
 	protected String materiau;
 	
+	public Exemplaire(int prixAchat, String classification) {
+		super();
+		PrixAchat = prixAchat;
+		this.classification = classification;
+	}
+
 	public Exemplaire(int anneeAchat, int prixAchat, String classification, String materiau) {
 		super();
 		this.anneeAchat = anneeAchat;
