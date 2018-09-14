@@ -67,7 +67,7 @@ public class ControleurArme {
 	public void notifierNaviguerEditerArme(int idArme)
 	{
 		System.out.println("ControleurArme.notifierEditerArme("+idArme+")");
-		this.vueEditerArme.afficherMouton(this.armeDAO.rapporterArme(idArme));
+		this.vueEditerArme.afficherArme(this.armeDAO.rapporterArme(idArme));
 		this.navigateur.naviguerVersVueEditerArme();
 		
 	}
