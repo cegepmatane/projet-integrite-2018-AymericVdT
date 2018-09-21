@@ -8,16 +8,17 @@ public class Exemplaire {
 	protected String classification;
 	protected String materiau;
 	
-	public Exemplaire(int prixAchat, String classification) {
+	public Exemplaire(int prixAchat, String classification, String materiau) {
 		super();
-		PrixAchat = prixAchat;
+		this.PrixAchat = prixAchat;
 		this.classification = classification;
+		this.materiau = materiau;
 	}
 
 	public Exemplaire(int anneeAchat, int prixAchat, String classification, String materiau) {
 		super();
 		this.anneeAchat = anneeAchat;
-		PrixAchat = prixAchat;
+		this.PrixAchat = prixAchat;
 		this.classification = classification;
 		this.materiau = materiau;
 	}
@@ -43,7 +44,7 @@ public class Exemplaire {
 	}
 
 	public void setPrixAchat(int prixAchat) {
-		PrixAchat = prixAchat;
+		this.PrixAchat = prixAchat;
 	}
 
 	public String getClassification() {

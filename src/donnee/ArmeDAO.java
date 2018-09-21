@@ -11,7 +11,7 @@ import java.util.List;
 
 import modele.Arme;
 
-public class ArmeDAO {
+public class ArmeDAO implements ArmeSQL {
 
 	private Connection connection = null;
 	
@@ -26,9 +26,10 @@ public class ArmeDAO {
 		List<Arme> listeArmes =  new ArrayList<Arme>();
 		try {			
 			Statement requeteListeArmes = connection.createStatement();
-			ResultSet curseurListeArmes = requeteListeArmes.executeQuery("SELECT * FROM Armes");
+			ResultSet curseurListeArmes = requeteListeArmes.executeQuery(SQL_LISTER_ARMES);
 			while(curseurListeArmes.next())
 			{
+				int id = curseurListeArmes.getInt("id");
 				String nom = curseurListeArmes.getString("nom");
 				String famille = curseurListeArmes.getString("famille");
 				String type = curseurListeArmes.getString("type");
@@ -36,6 +37,7 @@ public class ArmeDAO {
 				String epoque = curseurListeArmes.getString("epoque");
 				System.out.println("" + nom + ", famille:" + famille + " un type de " + type + " creee en " + origine + " au " + epoque + "eme siecle");
 				Arme arme = new Arme(nom,famille, type, origine, Integer.parseInt(epoque));
+				arme.setId(id);
 				listeArmes.add(arme);
 			}
 						
@@ -48,10 +50,16 @@ public class ArmeDAO {
 	
 	public void ajouterArme(Arme arme){
 		try {
-			Statement requeteAjouterArme = connection.createStatement();
-			requeteAjouterArme.execute("INSERT into Arme(nom,famille,type,origine,epoque) VALUES('"+arme.getNom()+"','"+arme.getType()+"','"+arme.getFamille()+"','"+arme.getOrigine()+"','"+arme.getEpoque());
+			PreparedStatement requeteAjouterArme = connection.prepareStatement(SQL_AJOUTER_ARME);
+			requeteAjouterArme.setString(1,arme.getNom());
+			requeteAjouterArme.setString(2,arme.getType());
+			requeteAjouterArme.setString(3,arme.getFamille());
+			requeteAjouterArme.setString(4,arme.getOrigine());
+			requeteAjouterArme.setInt(5,arme.getEpoque());
+			requeteAjouterArme.execute();
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -59,16 +67,15 @@ public class ArmeDAO {
 	{
 		System.out.println("ArmeDAO.modifierArme()");
 		try {
-			PreparedStatement requeteModifierArme = connection.prepareStatement("UPDATE mouton SET nom = ?, type = ?, famille = ?, origine = ?, epoque = ? WHERE id = ?");
+			PreparedStatement requeteModifierArme = connection.prepareStatement(SQL_MODIFIER_ARME);
 			requeteModifierArme.setString(1, arme.getNom());
 			requeteModifierArme.setString(2, arme.getType());
 			requeteModifierArme.setString(3, arme.getFamille());
 			requeteModifierArme.setString(4, arme.getOrigine());
 			requeteModifierArme.setInt(5, arme.getEpoque());
 			requeteModifierArme.setInt(6, arme.getId());
-			
-			System.out.println("SQL : " + "UPDATE mouton SET nom = ?, type = ?, famille = ?, origine = ?, epoque = ? WHERE id = ?");
 			requeteModifierArme.execute();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -78,9 +85,9 @@ public class ArmeDAO {
 	{
 		PreparedStatement requeteArme;
 		try {
-			requeteArme = connection.prepareStatement("SELECT * FROM arme WHERE id = ?");
+			requeteArme = connection.prepareStatement(SQL_RAPPORTER_ARME);
 			requeteArme.setInt(1, idArme);
-			System.out.println("SELECT * FROM arme WHERE id = ?");
+			System.out.println(SQL_RAPPORTER_ARME);
 			ResultSet curseurArme = requeteArme.executeQuery();
 			curseurArme.next();
 			int id = curseurArme.getInt("id");

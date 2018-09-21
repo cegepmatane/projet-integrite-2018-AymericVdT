@@ -9,7 +9,7 @@ import java.util.List;
 
 import modele.Exemplaire;
 
-public class ExemplaireDAO {
+public class ExemplaireDAO implements ExemplaireSQL {
 
 	private Connection connection = null;
 	
@@ -24,7 +24,7 @@ public class ExemplaireDAO {
 		List<Exemplaire> listeExemplaires =  new ArrayList<Exemplaire>();			
 		PreparedStatement requeteListeExemplaires;
 		try {
-			requeteListeExemplaires = connection.prepareStatement("SELECT * FROM exemplaire WHERE arme = ?");
+			requeteListeExemplaires = connection.prepareStatement(SQL_LISTER_EXEMPLAIRES_PAR_ARME);
 			requeteListeExemplaires.setInt(1, idArme);
 			ResultSet curseurListeExemplaires = requeteListeExemplaires.executeQuery(); 
 			while(curseurListeExemplaires.next())
@@ -32,9 +32,10 @@ public class ExemplaireDAO {
 				int id = curseurListeExemplaires.getInt("id");
 				int prixAchat = curseurListeExemplaires.getInt("prixAchat");
 				String classification = curseurListeExemplaires.getString("classification");
-				System.out.println("" + classification + " achete pour " + prixAchat);
+				String materiau = curseurListeExemplaires.getString("materiau");
+				System.out.println("" + classification +" en " + materiau + " achete pour " + prixAchat);
 				
-				Exemplaire exemplaire = new Exemplaire(prixAchat, classification);
+				Exemplaire exemplaire = new Exemplaire(prixAchat, classification, materiau);
 				exemplaire.setId(id);
 				listeExemplaires.add(exemplaire);
 			}
@@ -49,9 +50,9 @@ public class ExemplaireDAO {
 	{
 		List<Exemplaire> listeExemplaires = new ArrayList<Exemplaire>();
 		Exemplaire prix;
-		prix = new Exemplaire(150, "Replique");
+		prix = new Exemplaire(150, "Replique", "Mousse");
 		listeExemplaires.add(prix);
-		prix = new Exemplaire(680, "Veritable");
+		prix = new Exemplaire(680, "Veritable", "Acier");
 		listeExemplaires.add(prix);
 		
 		return listeExemplaires;
