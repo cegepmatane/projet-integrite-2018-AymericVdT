@@ -55,10 +55,46 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: Armes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: Arme; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE "Armes" (
+CREATE TABLE "Exemplaire"(
+    id integer NOT NULL,
+    classification text,
+    materiau text,
+    prixAchat integer,
+    arme integer
+);
+
+
+ALTER TABLE "Exemplaire" OWNER TO postgres;
+
+--
+-- Name: Exemplaire_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres;
+--
+
+CREATE SEQUENCE Exemplaire_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+    
+    
+ALTER TABLE Exemplaire_id_seq OWNER TO postgres;
+
+--
+-- Name: Exemplempaire_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE Exemplaire_id_seq OWNER BY exemplaire.id;
+
+
+--
+-- Name: Arme; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE "Arme" (
     id integer NOT NULL,
     nom text,
     famille text,
@@ -68,13 +104,13 @@ CREATE TABLE "Armes" (
 );
 
 
-ALTER TABLE "Armes" OWNER TO postgres;
+ALTER TABLE "Arme" OWNER TO postgres;
 
 --
--- Name: Armes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: Arme_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE "Armes_id_seq"
+CREATE SEQUENCE "Arme_id_seq"
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -82,45 +118,85 @@ CREATE SEQUENCE "Armes_id_seq"
     CACHE 1;
 
 
-ALTER TABLE "Armes_id_seq" OWNER TO postgres;
+ALTER TABLE "Arme_id_seq" OWNER TO postgres;
 
 --
--- Name: Armes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: Arme_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "Armes_id_seq" OWNED BY "Armes".id;
-
-
---
--- Name: Armes id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY "Armes" ALTER COLUMN id SET DEFAULT nextval('"Armes_id_seq"'::regclass);
-
+ALTER SEQUENCE "Arme_id_seq" OWNED BY "Arme".id;
 
 --
--- Data for Name: Armes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: Exemplaire id; Type: DEFAULT; Schema: public; Owner postgres
 --
 
-INSERT INTO "Armes" VALUES (1, 'Hallebarde', 'Hast', 'Lance', 'Suisse', 14);
-INSERT INTO "Armes" VALUES (2, 'Claymore', 'Epee', 'Tranchante', 'Ecosse', 14);
-INSERT INTO "Armes" VALUES (3, 'Chu Ko Nu', 'Arbalete', 'Distance', 'Chine', 4);
+ALTER TABLE ONLY "Exemplaire" ALTER COLUMN id SET DEFAULT nextval('Exemplaire_id_seq'::regclass);
 
 
 --
--- Name: Armes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: Arme id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Armes_id_seq"', 3, true);
+ALTER TABLE ONLY "Arme" ALTER COLUMN id SET DEFAULT nextval('"Arme_id_seq"'::regclass);
 
 
 --
--- Name: Armes Armes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Daya for Name: Exemplaire; Type: TABLE DATA; Schema: public; Owner postgres
 --
 
-ALTER TABLE ONLY "Armes"
-    ADD CONSTRAINT "Armes_pkey" PRIMARY KEY (id);
 
+
+--
+-- Name: Exemplaire_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('Exemplaire_id_seq', 1, false);
+
+
+-- Data for Name: Arme; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "Arme" VALUES (1, 'Hallebarde', 'Hast', 'Lance', 'Suisse', 14);
+INSERT INTO "Arme" VALUES (2, 'Claymore', 'Epee', 'Tranchante', 'Ecosse', 14);
+INSERT INTO "Arme" VALUES (3, 'Chu Ko Nu', 'Arbalete', 'Distance', 'Chine', 4);
+
+
+--
+-- Name: Arme_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"Arme_id_seq"', 3, true);
+
+
+--
+-- Name: distinction distinction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Exemplaire"
+    ADD CONSTRAINT "Exemplaire_pkey" PRIMARY KEY (ID);
+
+
+--
+-- Name: Arme Arme_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Arme"
+    ADD CONSTRAINT "Arme_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: fki_one_arme_to_many_exemplaire; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fki_one_arme_to_many_exemplaire ON "Exemplaire" USING btree ("Arme");
+
+
+--
+-- Name: distinction one_arme_to_many_exemplaire; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY distinction
+    ADD CONSTRAINT one_arme_to_many_exemplaire FOREIGN KEY (arme) REFERENCES "Arme"(id);
 
 --
 -- PostgreSQL database dump complete
