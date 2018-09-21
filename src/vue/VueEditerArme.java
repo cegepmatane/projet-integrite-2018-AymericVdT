@@ -1,5 +1,7 @@
 package vue;
 
+import java.util.List;
+
 import action.ControleurArme;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import modele.Arme;
+import modele.Exemplaire;
 
 public class VueEditerArme extends Scene{
 	protected TextField valeurNom;
@@ -84,6 +87,19 @@ public class VueEditerArme extends Scene{
 		this.valeurFamille.setText(arme.getFamille());
 		this.valeurOrigine.setText(arme.getOrigine());
 		this.valeurEpoque.setText(""+arme.getEpoque());
+	}
+	
+	public void afficherListeExemplaire(List<Exemplaire> listeExemplaires)
+	{
+		int item = 0;
+		for(Exemplaire exemplaire : listeExemplaires)
+		{
+			this.grilleListeExemplaires.add(new Label(exemplaire.getClassification() + ""), 0, item);
+			this.grilleListeExemplaires.add(new Label(exemplaire.getPrixAchat()+""), 1, item);
+			this.grilleListeExemplaires.add(new Button("Éditer"), 2, item);
+			this.grilleListeExemplaires.add(new Button("Effacer"), 3, item);
+			item++;
+		}		
 	}
 	
 	public Arme demanderArme()
