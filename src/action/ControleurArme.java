@@ -3,6 +3,7 @@ package action;
 import java.util.List;
 
 import donnee.ArmeDAO;
+import donnee.ExemplaireDAO;
 import modele.Arme;
 import vue.NavigateurDesVues;
 import vue.VueAjouterArme;
@@ -17,11 +18,13 @@ public class ControleurArme {
 	private VueAjouterArme vueAjouterArme = null;
 	private VueEditerArme vueEditerArme = null;
 	ArmeDAO armeDAO = null;
+	ExemplaireDAO exemplaireDAO = null;
 	
 	private ControleurArme()
 	{
 		System.out.println("Initialisation du controleur");	
 		this.armeDAO = new ArmeDAO();
+		this.exemplaireDAO = new ExemplaireDAO();
 	}
 	
 	public void activerVues(NavigateurDesVues navigateur)
@@ -30,6 +33,7 @@ public class ControleurArme {
 		this.vueAjouterArme = navigateur.getVueAjouterArme();
 		this.vueArme = navigateur.getVueArme();
 		this.vueListeArme = navigateur.getVueListeArme();
+		this.vueEditerArme = navigateur.getVueEditerArme();
 						
 	}
 	
@@ -68,6 +72,7 @@ public class ControleurArme {
 	{
 		System.out.println("ControleurArme.notifierEditerArme("+idArme+")");
 		this.vueEditerArme.afficherArme(this.armeDAO.rapporterArme(idArme));
+		this.vueEditerArme.afficherListeExemplaires(this.exemplaireDAO.listerExemplairesParArme(idArme));
 		this.navigateur.naviguerVersVueEditerArme();
 		
 	}

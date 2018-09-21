@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class BaseDeDonnees {
+public class BaseDeDonnees{
 	
 	//Commande pour creer la bd
 	//pg_dump --username=postgres --inserts -C  CollectionArmes > C:\Users\1801031\eclipse-workspace\CollectionArmes\data\collectionArmes.sql
