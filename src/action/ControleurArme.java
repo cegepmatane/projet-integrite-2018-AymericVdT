@@ -72,7 +72,7 @@ public class ControleurArme {
 	{
 		System.out.println("ControleurArme.notifierEditerArme("+idArme+")");
 		this.vueEditerArme.afficherArme(this.armeDAO.rapporterArme(idArme));
-		this.vueEditerArme.afficherListeExemplaires(this.exemplaireDAO.listerExemplairesParArme(idArme));
+		this.vueEditerArme.afficherListeExemplaire(this.exemplaireDAO.listerExemplairesParArme(idArme));
 		this.navigateur.naviguerVersVueEditerArme();
 		
 	}
