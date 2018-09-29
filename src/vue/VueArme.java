@@ -1,7 +1,10 @@
 package vue;
 
 import action.ControleurArme;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -14,6 +17,7 @@ public class VueArme extends Scene{
 	protected Label valeurType = null;
 	protected Label valeurOrigine = null;
 	protected Label valeurEpoque = null;
+	int valeurId = 0;
 	
 	private ControleurArme controleur = null;
 	
@@ -44,6 +48,17 @@ public class VueArme extends Scene{
 		valeurEpoque = new Label("");
 		grilleArme.add(new Label("Epoque: "), 0, 4);
 		grilleArme.add(valeurEpoque, 1, 4);
+
+		Button suppression = new Button("Supprimer");
+		suppression.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				controleur.notifierSupprimerArme(valeurId);
+				
+			}
+		});
+		grilleArme.add(suppression,1,6);
 		
 		panneau.getChildren().add(grilleArme);
 		
@@ -55,6 +70,7 @@ public class VueArme extends Scene{
 		this.valeurType.setText(arme.getType());
 		this.valeurOrigine.setText(arme.getOrigine());
 		this.valeurEpoque.setText(""+arme.getEpoque());
+		this.valeurId = arme.getId();
 	}
 	
 	public void setControleur(ControleurArme controleur) {
