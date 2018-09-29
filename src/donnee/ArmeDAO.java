@@ -105,4 +105,15 @@ public class ArmeDAO implements ArmeSQL {
 		}
 		return null;
 	}
+	
+	public void supprimerArme(int idArme) {
+		PreparedStatement requeteArme;
+		try {
+			requeteArme = connection.prepareStatement(SQL_SUPPRIMER_ARME);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
