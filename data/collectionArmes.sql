@@ -100,7 +100,8 @@ CREATE TABLE "Arme" (
     famille text,
     type text,
     origine text,
-    epoque integer
+    epoque integer,
+    id_exemplaire integer
 );
 
 

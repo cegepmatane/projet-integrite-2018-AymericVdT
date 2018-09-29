@@ -1,0 +1,15 @@
+CREATE or REPLACE FUNCTION supprimerObjetParExemplaire()
+	RETURNS trigger 
+	LANGUAGE 'plpgsql'
+
+AS $supressionObjetParExemplaire$
+BEGIN
+	DELETE FROM public."Arme" where id_exemplaire = OLD.id;
+	return OLD;
+END
+$supressionObjetParExemplaire$
+
+CREATE TRIGGER netoyageAvantSupressionExemplaire
+BEFORE DELETE ON public."Exemplaire"
+		FOR EACH ROW EXECUTE PROCEDURE
+			supprimerObjetParExemplaire();
