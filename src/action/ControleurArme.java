@@ -64,7 +64,7 @@ public class ControleurArme {
 	
 	public void notifierNaviguerAjouterArme()
 	{
-		System.out.println("ControleurMouton.notifierNaviguerAjouterMouton()");
+		System.out.println("ControleurArme.notifierNaviguerAjouterArme()");
 		this.navigateur.naviguerVersVueAjouterArme();
 	}
 	
@@ -74,6 +74,14 @@ public class ControleurArme {
 		this.vueEditerArme.afficherArme(this.armeDAO.rapporterArme(idArme));
 		this.vueEditerArme.afficherListeExemplaire(this.exemplaireDAO.listerExemplairesParArme(idArme));
 		this.navigateur.naviguerVersVueEditerArme();
+		
+	}
+	
+	public void notifierSupprimerArme(int idArme)
+	{
+		this.armeDAO.supprimerArme(idArme);
+		this.vueListeArme.afficherListeArme(this.armeDAO.listerArmes());
+		this.navigateur.naviguerVersVueListeArme();		
 		
 	}
 }
