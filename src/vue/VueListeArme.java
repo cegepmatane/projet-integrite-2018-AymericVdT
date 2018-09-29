@@ -20,9 +20,9 @@ public class VueListeArme extends Scene{
 	private ControleurArme controleur = null;
 	
 	private Button actionNaviguerAjouterArme;
+
 	public VueListeArme() {
 		super(new GridPane(), 800,400);
-		Pane panneau = (Pane) this.getRoot();
 		grilleArme = (GridPane) this.getRoot();
 		this.actionNaviguerAjouterArme = new Button("Ajouter une arme");
 		}
@@ -32,7 +32,20 @@ public class VueListeArme extends Scene{
 		
 		int numero = 0;
 		this.grilleArme.add(new Label("Nom"), 0, numero);
-		this.grilleArme.add(new Label("Type"), 1, numero);			
+		this.grilleArme.add(new Label("Type"), 1, numero);
+		for(Arme arme: listeArmes) {
+			Button actionNaviguerModifierArme= new Button("Editer");
+			actionNaviguerModifierArme.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent a) {
+					controleur.notifierNaviguerEditerArme(arme.getId());
+				}});
+			numero++;
+			this.grilleArme.add(new Label(arme.getNom()), 0, numero);
+			this.grilleArme.add(new Label(arme.getType()), 1, numero);			
+			this.grilleArme.add(actionNaviguerModifierArme, 2, numero);
+		}
+		
 		this.actionNaviguerAjouterArme.setOnAction(new EventHandler<ActionEvent>() 
 		{
 			@Override
