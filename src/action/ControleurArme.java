@@ -17,8 +17,8 @@ public class ControleurArme {
 	private VueArme vueArme = null;
 	private VueAjouterArme vueAjouterArme = null;
 	private VueEditerArme vueEditerArme = null;
-	ArmeDAO armeDAO = null;
-	ExemplaireDAO exemplaireDAO = null;
+	private ArmeDAO armeDAO = null;
+	private ExemplaireDAO exemplaireDAO = null;
 	
 	private ControleurArme()
 	{
