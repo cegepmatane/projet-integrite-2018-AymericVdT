@@ -64,6 +64,7 @@ public class NavigateurDesVues extends Application{
 	
 	public void naviguerVersVueListeArme()
 	{
+		System.out.println("NavigateurDesVues.naviguerVersVueListeArme()");
 		stade.setScene(this.vueListeArme);
 		stade.show();		
 	}

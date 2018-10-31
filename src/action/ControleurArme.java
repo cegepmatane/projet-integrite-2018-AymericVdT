@@ -34,7 +34,9 @@ public class ControleurArme {
 		this.vueArme = navigateur.getVueArme();
 		this.vueListeArme = navigateur.getVueListeArme();
 		this.vueEditerArme = navigateur.getVueEditerArme();
-						
+		
+		this.navigateur.naviguerVersVueListeArme();	
+		this.vueListeArme.afficherListeArme(this.armeDAO.listerArmes());
 	}
 	
 	private static ControleurArme instance = null;
