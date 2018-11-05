@@ -53,8 +53,8 @@ public class VueAjouterArme extends Scene{
 		grilleArme.add(valeurOrigine,1, 3);
 		
 		valeurEpoque = new TextField();
-		grilleArme.add(new Label("Epoque: "), 0, 3);
-		grilleArme.add(valeurEpoque,1, 3);
+		grilleArme.add(new Label("Epoque: "), 0, 4);
+		grilleArme.add(valeurEpoque,1, 4);
 		
 		panneau.getChildren().add(new Label("Ajouter une arme")); 
 		panneau.getChildren().add(grilleArme);
