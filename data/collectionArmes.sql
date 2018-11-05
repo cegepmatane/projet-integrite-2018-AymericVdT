@@ -55,10 +55,10 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: Armes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: armes; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE "Armes" (
+CREATE TABLE armes (
     id integer NOT NULL,
     nom text,
     famille text,
@@ -68,7 +68,7 @@ CREATE TABLE "Armes" (
 );
 
 
-ALTER TABLE "Armes" OWNER TO postgres;
+ALTER TABLE armes OWNER TO postgres;
 
 --
 -- Name: Armes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -88,23 +88,29 @@ ALTER TABLE "Armes_id_seq" OWNER TO postgres;
 -- Name: Armes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE "Armes_id_seq" OWNED BY "Armes".id;
+ALTER SEQUENCE "Armes_id_seq" OWNED BY armes.id;
 
 
 --
--- Name: Armes id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: exemplaires; Type: TABLE; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "Armes" ALTER COLUMN id SET DEFAULT nextval('"Armes_id_seq"'::regclass);
+CREATE TABLE exemplaires (
+    "idExemplaire" integer NOT NULL,
+    "prixAchat" integer,
+    classification text,
+    materiau text,
+    "idArme" integer NOT NULL
+);
 
+
+ALTER TABLE exemplaires OWNER TO postgres;
 
 --
--- Data for Name: Armes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: armes id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-INSERT INTO "Armes" VALUES (1, 'Hallebarde', 'Hast', 'Lance', 'Suisse', 14);
-INSERT INTO "Armes" VALUES (2, 'Claymore', 'Epee', 'Tranchante', 'Ecosse', 14);
-INSERT INTO "Armes" VALUES (3, 'Chu Ko Nu', 'Arbalete', 'Distance', 'Chine', 4);
+ALTER TABLE ONLY armes ALTER COLUMN id SET DEFAULT nextval('"Armes_id_seq"'::regclass);
 
 
 --
@@ -115,11 +121,49 @@ SELECT pg_catalog.setval('"Armes_id_seq"', 3, true);
 
 
 --
--- Name: Armes Armes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Data for Name: armes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "Armes"
+INSERT INTO armes VALUES (1, 'Hallebarde', 'Hast', 'Lance', 'Suisse', 14);
+INSERT INTO armes VALUES (2, 'Claymore', 'Epee', 'Tranchante', 'Ecosse', 14);
+INSERT INTO armes VALUES (3, 'Chu Ko Nu', 'Arbalete', 'Distance', 'Chine', 4);
+
+
+--
+-- Data for Name: exemplaires; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Name: armes Armes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY armes
     ADD CONSTRAINT "Armes_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: exemplaires exemplaires_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY exemplaires
+    ADD CONSTRAINT exemplaires_pkey PRIMARY KEY ("idExemplaire");
+
+
+--
+-- Name: fki_fk_idArme; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "fki_fk_idArme" ON exemplaires USING btree ("idArme");
+
+
+--
+-- Name: exemplaires fk_idArme; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY exemplaires
+    ADD CONSTRAINT "fk_idArme" FOREIGN KEY ("idArme") REFERENCES armes(id);
 
 
 --

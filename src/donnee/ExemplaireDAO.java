@@ -24,7 +24,7 @@ public class ExemplaireDAO implements ExemplaireSQL {
 		List<Exemplaire> listeExemplaires =  new ArrayList<Exemplaire>();			
 		PreparedStatement requeteListeExemplaires;
 		try {
-			requeteListeExemplaires = connection.prepareStatement(SQL_LISTER_EXEMPLAIRES_PAR_ARME);
+			requeteListeExemplaires = connection.prepareStatement(SQL_LISTER_EXEMPLAIRES_PAR_ARME+"idArme");
 			requeteListeExemplaires.setInt(1, idArme);
 			ResultSet curseurListeExemplaires = requeteListeExemplaires.executeQuery(); 
 			while(curseurListeExemplaires.next())
