@@ -25,6 +25,7 @@ public class ControleurArme {
 		System.out.println("Initialisation du controleur");	
 		this.armeDAO = new ArmeDAO();
 		this.exemplaireDAO = new ExemplaireDAO();
+
 	}
 	
 	public void activerVues(NavigateurDesVues navigateur)
@@ -34,7 +35,9 @@ public class ControleurArme {
 		this.vueArme = navigateur.getVueArme();
 		this.vueListeArme = navigateur.getVueListeArme();
 		this.vueEditerArme = navigateur.getVueEditerArme();
-						
+		
+		this.navigateur.naviguerVersVueListeArme();	
+		this.vueListeArme.afficherListeArme(this.armeDAO.listerArmes());
 	}
 	
 	private static ControleurArme instance = null;

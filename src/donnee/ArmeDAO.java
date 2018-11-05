@@ -1,7 +1,6 @@
 package donnee;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,6 +38,7 @@ public class ArmeDAO implements ArmeSQL {
 				Arme arme = new Arme(nom,famille, type, origine, Integer.parseInt(epoque));
 				arme.setId(id);
 				listeArmes.add(arme);
+
 			}
 						
 		} catch (SQLException e) {

@@ -10,9 +10,10 @@ public class BaseDeDonnees{
 	//pg_dump --username=postgres --inserts -C  CollectionArmes > C:\Users\1801031\eclipse-workspace\CollectionArmes\data\collectionArmes.sql
 
 	private Connection connection = null;
-	
+
 	private BaseDeDonnees()
 	{
+
 		try {
 			Class.forName(Acces.BASEDEDONNEES_DRIVER);
 		} catch (ClassNotFoundException e) {

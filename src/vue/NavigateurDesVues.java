@@ -1,12 +1,8 @@
 package vue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import action.ControleurArme;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import modele.Arme;
 
 public class NavigateurDesVues extends Application{
 
@@ -24,7 +20,7 @@ public class NavigateurDesVues extends Application{
 		this.vueListeArme = new VueListeArme();
 		this.vueArme = new VueArme();
 		this.vueEditerArme = new VueEditerArme();
-	}
+			}
 	
 	@Override
 	public void start(Stage stade) throws Exception {

@@ -79,7 +79,7 @@ BEGIN
         FROM public."Exemplaire";
     for donneeAggreagatArme in Select string_agg(e.id,'-') as aggregatExemplaire,
         Count(e.id) as nombreExemplaireParArme, a.nom as nomArme
-        FROM public."Exemplaire" as e join public."Arme" as c on e.arme = a.id group by a.nom loop
+        FROM public."Exemplaire" as e join public."Arme" as a on e.arme = a.id group by a.nom loop
         checksumAggreagatArme := checksumAggreagatArme || '//' || donneeAggreagatArme.nomArme || ':' || donneeAggreagatArme.aggregatExemplaire;
         nombreTotalExemplaireArme := nombreTotalExemplaireArme + donneeAggreagatArme.nombreExemplaireParArme;
         end loop;
